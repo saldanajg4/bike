@@ -3,13 +3,16 @@ package com.spring.bike.models;
 import java.math.BigDecimal;
 import java.sql.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /***
  * Create primary key for the class normally called id and use
@@ -18,11 +21,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  * Entity.
  */
 @Entity
+@Table(name="bike")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Bike {
      //added as primary key for record and create getter and setter
      @Id
-     @GeneratedValue(strategy = GenerationType.AUTO)
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
      private Long id;
  
      /****
@@ -30,16 +34,30 @@ public class Bike {
       * Columnames and column mapping but jpa will directly map to our structure
       * by just attribute name and column name
       */
+    @Column(name = "name")
      private String name;
+
+     @Column(name = "email")
      private String email;
+
+     @Column(name = "phone")
      private String phone;
+
+     @Column(name = "model")
      private String model;
+
+     @Column(name = "serialNumber")
      private String serialNumber;
+
+     @Column(name = "purchasePrice")
      private BigDecimal purchasePrice;
  
      //passing date data back and forth easier
      @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM-dd-yyyy")
+     @Column(name = "purchaseDate")
      private Date purchaseDate;
+
+     @Column(name = "contact")
      private boolean contact;
  
      public String getName() {
